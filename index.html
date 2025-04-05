@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story ❤️</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --pink: #ff9bb3;
+            --dark-pink: #d23669;
+            --light-pink: #ffdfea;
+            --purple: #c9a0ff;
+            --white: #fff9fb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--white);
+            color: #5e3a5e;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Romantic header with animated title */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, var(--light-pink), var(--pink));
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(210, 54, 105, 0.2);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: white;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Floating hearts in header */
+        .header-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        /* Memory gallery - now swipe-friendly */
+        .memory-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 15px;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced memory card with romantic details */
+        .memory-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(255, 155, 179, 0.3);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(210, 54, 105, 0.25);
+        }
+
+        .memory-image-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .memory-card:hover .memory-image {
+            transform: scale(1.05);
+        }
+
+        .memory-details {
+            padding: 18px;
+            position: relative;
+        }
+
+        .memory-date {
+            font-size: 0.85rem;
+            color: var(--dark-pink);
+            margin-bottom: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .memory-date i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .memory-description {
+            line-height: 1.5;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Romantic heart corner that pulses */
+        .heart-corner {
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--dark-pink);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--pink);
+            z-index: 3;
+            animation: pulse 2s infinite;
+        }
+
+        /* Photo overlay effect */
+        .memory-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 155, 179, 0.1), rgba(210, 54, 105, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .memory-card:hover .memory-image-container::after {
+            opacity: 1;
+        }
+
+        /* Romantic footer with love note */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--dark-pink);
+            background: var(--light-pink);
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        /* Floating hearts background */
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+            z-index: -1;
+            color: var(--pink);
+            opacity: 0.6;
+        }
+
+        /* Love note popup */
+        .love-note {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--dark-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.4);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .love-note:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .note-popup {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 101;
+            display: none;
+            border: 1px solid var(--pink);
+            transform-origin: bottom right;
+        }
+
+        .note-popup h3 {
+            margin-top: 0;
+            color: var(--dark-pink);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+        }
+
+        .note-popup p {
+            line-height: 1.6;
+        }
+
+        .close-note {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--pink);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Music player */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: var(--dark-pink);
+            font-size: 20px;
+            cursor: pointer;
+            border: 2px solid var(--pink);
+        }
+
+        /* Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.3);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.3);
+            }
+
+            70% {
+                transform: scale(1);
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .memory-gallery {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .memory-image-container {
+                height: 180px;
+            }
+
+            footer {
+                font-size: 1.3rem;
+                padding: 25px 15px;
+            }
+
+            .note-popup {
+                width: 90%;
+                right: 5%;
+                bottom: 80px;
+            }
+        }
+
+        /* Special romantic effects */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+            animation: sparkle 1s ease-out forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-pink);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hearts-container"></div>
+
+    <!-- Music player -->
+    <div class="music-player" id="musicToggle">
+        <i class="fas fa-music"></i>
+        <audio id="bgMusic" loop>
+            <source src="./04 Apocalypse.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Header with floating hearts -->
+    <header>
+        <div id="header-hearts"></div>
+        <h1>Our Beautiful Journey</h1>
+        <div class="subtitle">Every moment with you is my favorite memory</div>
+    </header>
+
+    <!-- Memory gallery -->
+    <div class="memory-gallery">
+        <!-- Memory cards will be generated by JavaScript -->
+    </div>
+
+    <!-- Romantic footer -->
+    <footer>
+        <div class="footer-hearts" id="footer-hearts"></div>
+        To all the memories we've made and all those yet to come...
+        <div style="font-size: 2rem; margin-top: 10px;">❤️</div>
+    </footer>
+
+    <!-- Love note button and popup -->
+    <div class="love-note" id="loveNoteBtn">
+        <i class="fas fa-heart"></i>
+    </div>
+
+    <div class="note-popup" id="loveNote">
+        <button class="close-note" id="closeNote">&times;</button>
+        <h3>My Dearest Love</h3>
+        <p>As you look through these memories, I want you to know that each one is a precious treasure to me. My
+            favorite part of every picture isn't what we're doing or where we are - it's the way your eyes shine with
+            happiness.</p>
+        <p>I fall in love with you more every day.</p>
+        <p>Forever yours,</p>
+        <p style="font-family: 'Dancing Script', cursive; font-size: 1.8rem;">[Your Name]</p>
+    </div>
+
+    <script>
+        // Romantic data - replace with your actual memories
+        const memories = [
+            {
+                date: "June 12, 2020",
+                description: "Our first meeting - the day my life changed forever. I knew from the moment I saw you that you were special.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,1"
+            },
+            {
+                date: "July 4, 2020",
+                description: "Our first date under the fireworks. You looked so beautiful with the lights reflecting in your eyes.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,2"
+            },
+            {
+                date: "August 20, 2020",
+                description: "That weekend getaway to the mountains. We got lost but found our way together, just like in life.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,3"
+            },
+            {
+                date: "October 31, 2020",
+                description: "Our silly couple Halloween costumes. You made even dressing up as zombies romantic!",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,4"
+            },
+            {
+                date: "December 25, 2020",
+                description: "Our first Christmas together. The way you smiled when you opened my gift still makes my heart skip.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,5"
+            },
+            {
+                date: "February 14, 2021",
+                description: "Valentine's Day surprise - you cooked me dinner even though you claim you can't cook. It was perfect.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,6"
+            },
+            {
+                date: "March 8, 2021",
+                description: "That rainy day we stayed in bed all day watching movies. Your laugh is my favorite sound.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,7"
+            },
+            {
+                date: "April 22, 2021",
+                description: "Our picnic in the park when all the cherry blossoms were blooming. Nature's confetti for us.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,8"
+            },
+            {
+                date: "May 30, 2021",
+                description: "The beach trip where you tried to teach me to surf. I failed miserably but you cheered me on anyway.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,9"
+            },
+            {
+                date: "June 12, 2021",
+                description: "Our first anniversary. You recreated our first date but made it even more special.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,10"
+            },
+            {
+                date: "July 18, 2021",
+                description: "That concert where we sang our song at the top of our lungs, not caring who heard.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,11"
+            },
+            {
+                date: "August 5, 2021",
+                description: "The night we stayed up until sunrise talking about our dreams. I fell in love with you all over again.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,12"
+            },
+            {
+                date: "September 3, 2021",
+                description: "When you surprised me with tickets to Paris. I still can't believe we actually went!",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,13"
+            },
+            {
+                date: "October 10, 2021",
+                description: "That time we got caught in the rain and danced in the puddles like kids.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,14"
+            },
+            {
+                date: "November 28, 2021",
+                description: "Thanksgiving with your family. They welcomed me like I was already part of the family.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,15"
+            },
+            {
+                date: "December 31, 2021",
+                description: "New Year's kiss that made me believe in magic. I knew this year would be our best yet.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,16"
+            },
+            {
+                date: "January 15, 2022",
+                description: "The day we adopted our pet together. Our little family started growing.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,17"
+            },
+            {
+                date: "February 22, 2022",
+                description: "When you nursed me back to health when I was sick. You're my favorite nurse.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,18"
+            },
+            {
+                date: "March 17, 2022",
+                description: "St. Patrick's Day when we both wore ridiculous green outfits and had the best time.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,19"
+            },
+            {
+                date: "Today",
+                description: "Every day with you is my new favorite memory. I can't wait to create thousands more with you.",
+                image: "https://source.unsplash.com/random/600x400/?couple,love,20"
+            }
+        ];
+
+        // Create memory cards
+        const gallery = document.querySelector('.memory-gallery');
+
+        memories.forEach((memory, index) => {
+            const card = document.createElement('div');
+            card.className = 'memory-card';
+            card.innerHTML = `
+                <div class="heart-corner">❤</div>
+                <div class="memory-image-container">
+                    <img src="${memory.image}" alt="Memory ${index + 1}" class="memory-image">
+                </div>
+                <div class="memory-details">
+                    <div class="memory-date"><i class="far fa-calendar-alt"></i> ${memory.date}</div>
+                    <div class="memory-description">${memory.description}</div>
+                </div>
+            `;
+            gallery.appendChild(card);
+
+            // Add sparkle effect when hovering over cards
+            card.addEventListener('mouseenter', () => {
+                createSparkles(card);
+            });
+
+            card.addEventListener('touchstart', () => {
+                createSparkles(card);
+            }, { passive: true });
+        });
+
+        // Create floating hearts background
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const headerContainer = document.getElementById('header-hearts');
+            const footerContainer = document.getElementById('footer-hearts');
+
+            for (let i = 0; i < 20; i++) {
+                // Background hearts
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.opacity = Math.random() * 0.4 + 0.2;
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(heart);
+
+                // Header hearts
+                if (i < 8) {
+                    const headerHeart = document.createElement('div');
+                    headerHeart.innerHTML = '❤';
+                    headerHeart.classList.add('header-heart');
+                    headerHeart.style.left = Math.random() * 100 + 'vw';
+                    headerHeart.style.top = Math.random() * 100 + 'vh';
+                    headerHeart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    headerHeart.style.opacity = Math.random() * 0.3 + 0.1;
+                    headerHeart.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                    headerHeart.style.animationDelay = (Math.random() * 5) + 's';
+                    headerContainer.appendChild(headerHeart);
+                }
+
+                // Footer hearts
+                if (i < 5) {
+                    const footerHeart = document.createElement('div');
+                    footerHeart.innerHTML = '❤';
+                    footerHeart.classList.add('header-heart');
+                    footerHeart.style.left = Math.random() * 100 + 'vw';
+                    footerHeart.style.top = Math.random() * 100 + 'vh';
+                    footerHeart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                    footerHeart.style.opacity = Math.random() * 0.3 + 0.1;
+                    footerHeart.style.animationDuration = (Math.random() * 12 + 8) + 's';
+                    footerHeart.style.animationDelay = (Math.random() * 5) + 's';
+                    footerContainer.appendChild(footerHeart);
+                }
+            }
+        }
+
+        // Create sparkle effects
+        function createSparkles(element) {
+            const rect = element.getBoundingClientRect();
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = (Math.random() * rect.width) + 'px';
+                sparkle.style.top = (Math.random() * rect.height) + 'px';
+                sparkle.style.animationDelay = (i * 0.1) + 's';
+                element.appendChild(sparkle);
+
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+        }
+
+        // Love note functionality
+        const loveNoteBtn = document.getElementById('loveNoteBtn');
+        const loveNote = document.getElementById('loveNote');
+        const closeNote = document.getElementById('closeNote');
+
+        loveNoteBtn.addEventListener('click', () => {
+            loveNote.style.display = 'block';
+            loveNote.style.animation = 'fadeIn 0.3s ease';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeNote.addEventListener('click', () => {
+            loveNote.style.animation = 'fadeIn 0.3s ease reverse';
+            setTimeout(() => {
+                loveNote.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        });
+
+        // Music player functionality
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                musicToggle.style.color = 'var(--dark-pink)';
+            } else {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                musicToggle.style.color = 'var(--purple)';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Initialize everything when page loads
+        window.onload = function () {
+            createHearts();
+
+            // Add slight delay to music start for better UX
+            setTimeout(() => {
+                bgMusic.volume = 0.3;
+                // Autoplay is often blocked by browsers without user interaction
+                // So we'll just prepare it but not actually play
+            }, 1000);
+
+            // Add romantic message in console
+            console.log('%cFor the most amazing person in my life ❤️', 'color: #d23669; font-size: 16px; font-family: "Dancing Script", cursive;');
+        };
+
+        // Make hearts interactive on touch devices
+        document.addEventListener('touchstart', function (e) {
+            if (e.touches.length > 0) {
+                for (let i = 0; i < 3; i++) {
+                    createTouchHeart(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }
+        }, { passive: true });
+
+        function createTouchHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.style.position = 'fixed';
+            heart.style.left = (x - 15) + 'px';
+            heart.style.top = (y - 15) + 'px';
+            heart.style.fontSize = '30px';
+            heart.style.color = 'var(--dark-pink)';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '100';
+            heart.style.animation = 'heartBeat 0.8s ease, fadeOut 1s ease 0.8s forwards';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 1800);
+        }
+    </script>
+</body>
+
+</html>
